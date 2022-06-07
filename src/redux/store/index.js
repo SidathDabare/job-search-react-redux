@@ -1,16 +1,16 @@
 /** @format */
 
-// /** @format */
-
-import { configureStore } from "@reduxjs/toolkit"
-import mainReducer from "../reducers"
+import { configureStore, combineReducers } from "@reduxjs/toolkit"
+import favouritesReducer from "../reducers/favouritesReducer"
+import searchReducer from "../reducers/searchReducer"
+//import mainReducer from "../reducers"
 
 const store = configureStore({
-  reducer: mainReducer,
-  //   reducer: configureStore({
-  //     favourites: favouritesReducer,
-  //     search: searchReducer,
-  //   }),
+  //reducer: mainReducer,
+  reducer: combineReducers({
+    favourites: favouritesReducer,
+    jobSearch: searchReducer,
+  }),
   // we're going to tell Redux which reducer function to use!
 })
 

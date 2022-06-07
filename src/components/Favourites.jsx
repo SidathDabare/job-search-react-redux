@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Button, Row, ListGroup } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { REMOVE_FROM_FAVOURITES } from '../redux/actions'
 
 const mapStateToProps = (state) => {
     console.log(state);
@@ -16,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         removeFromList: (indexToRemove) => {
             dispatch({
-                type: 'REMOVE_FROM_FAVOURITES',
+                type: REMOVE_FROM_FAVOURITES,
                 payload: indexToRemove,
             })
         },

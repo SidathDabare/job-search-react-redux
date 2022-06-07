@@ -1,16 +1,51 @@
 import { Component } from 'react'
-import { Container, Row, Col, Form } from 'react-bootstrap'
+import { Container, Row, Col, Form, Spinner } from 'react-bootstrap'
 import Job from './Job'
-import CartIndicator from './CartIndicator'
+import ListIndicator from './ListIndicator'
+import { connect } from 'react-redux'
+import { getJobsAction, jobsLoading } from '../redux/actions'
+
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    jobsFromRedux: state.jobSearch.jobs, // <-- the array of books from the redux store
+    errorFetching: state.error,
+    isLoading: state.loading,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getJobs: (query) => {
+      dispatch(getJobsAction(query))
+    },
+    // isLoading: () => {
+    //   dispatch(jobsLoading())
+    // }
+  }
+}
+
 
 class MainSearch extends Component {
   state = {
     query: '',
     jobs: [],
-    jobSelected: null,
+    isLoading: true
   }
 
-  baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+  // componentDidMount = async () => {
+  //   // previously here I was doing the fetch and saving the books locally...
+  //   // ...now I'll dispatch the action creator here! getBooks
+  //   this.props.getJobs()
+  // }
+  // state = {
+  //   query: '',
+  //   jobs: [],
+  //   jobSelected: null,
+  // }
+
+  // baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
 
   handleChange = (e) => {
     this.setState({ query: e.target.value })
@@ -18,18 +53,17 @@ class MainSearch extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault()
+    this.props.getJobs(this.state.query)
 
-    const response = await fetch(
-      this.baseEndpoint + this.state.query + '&limit=20'
-    )
-
-    if (!response.ok) {
-      alert('Error fetching results')
-      return
-    }
-
-    const { data } = await response.json()
-    this.setState({ jobs: data })
+    // const response = await fetch(
+    //   this.baseEndpoint + this.state.query + '&limit=20'
+    // // )
+    // if (!response.ok) {
+    //   alert('Error fetching results')
+    //   return
+    // }
+    // const { data } = await response.json()
+    // this.setState({ jobs: data })
   }
 
   render() {
@@ -50,13 +84,14 @@ class MainSearch extends Component {
                   onChange={this.handleChange}
                   placeholder="type and press Enter"
                 />
-                <CartIndicator xs={3} />
+                <ListIndicator xs={3} />
               </Form>
 
             </Row>
           </Col>
           <Col xs={10} className="mx-auto mb-5">
-            {this.state.jobs.map((jobData) => (
+            {this.props.isLoading && <Spinner animation="border" variant="secondary" />}
+            {this.props.jobsFromRedux.map((jobData) => (
               <Job key={jobData._id} data={jobData} />
             ))}
           </Col>
@@ -66,4 +101,4 @@ class MainSearch extends Component {
   }
 }
 
-export default MainSearch
+export default connect(mapStateToProps, mapDispatchToProps)(MainSearch)

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { ADD_TO_FAVOURITES } from '../redux/actions'
 const mapStateToProps = (state) => {
   return {
 
@@ -13,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addtoFavourite: (company) => {
       dispatch({
-        type: 'ADD_TO_FAVOURITES',
+        type: ADD_TO_FAVOURITES,
         payload: company,
       })
     },
@@ -22,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Job = ({ data, addtoFavourite }) => {
   const [state, setState] = useState([])
-  console.log(state);
+  // console.log(state);
 
 
   return (

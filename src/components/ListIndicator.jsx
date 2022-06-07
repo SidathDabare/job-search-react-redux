@@ -13,12 +13,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-const CartIndicator = ({ favourites }) => {
+const ListIndicator = ({ favourites }) => {
     const navigate = useNavigate()
 
     return (
         <div className="w-25 ml-2" >
-            <Button onClick={() => navigate('/Favourites')}>
+            <Button onClick={() => navigate('/Favourites')} variant="info">
                 Favourite List
                 <span className="ml-2">{favourites}</span>
             </Button>
@@ -26,4 +26,4 @@ const CartIndicator = ({ favourites }) => {
     )
 }
 
-export default connect(mapStateToProps)(CartIndicator)
+export default connect(mapStateToProps)(ListIndicator)
