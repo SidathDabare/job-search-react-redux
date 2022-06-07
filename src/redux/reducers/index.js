@@ -11,7 +11,7 @@ const mainReducer = (state = initialState, action) => {
     case "ADD_TO_FAVOURITES":
       return {
         ...state,
-        cart: {
+        favourites: {
           ...state.favourites,
           content: [...state.favourites.content, action.payload],
         },

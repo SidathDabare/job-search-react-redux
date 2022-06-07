@@ -28,12 +28,12 @@ const Favourites = ({ favourites, removeFromList }) => {
     console.log(favourites)
     return (
         <Row>
-            <Col sm={12}>
+            <Col sm={10} className="mx-auto">
 
                 <h4>Favourites List</h4>
                 <ListGroup >
                     {favourites.map((company, i) => (
-                        <ListGroup.Item key={i} >
+                        <ListGroup.Item key={i} className="d-flex justify-content-between">
                             <Link to={`/${company}`}>{company}</Link>
                             <Button style={{ margin: '2px' }} variant="danger" onClick={() => { removeFromList(i) }} >
                                 Remove
