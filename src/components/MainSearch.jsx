@@ -7,6 +7,7 @@ class MainSearch extends Component {
   state = {
     query: '',
     jobs: [],
+    jobSelected: null,
   }
 
   baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='

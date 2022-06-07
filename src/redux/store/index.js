@@ -1,13 +1,18 @@
 /** @format */
 
-import { configureStore } from "@reduxjs/toolkit"
-import mainReducer from "../reducers"
+// /** @format */
 
-const store = configureStore({
-  reducer: mainReducer,
-  // we're going to tell Redux which reducer function to use!
-})
+// import { configureStore } from "@reduxjs/toolkit"
+// import mainReducer from "../reducers"
 
-export default store
+// const store = configureStore({
+//   reducer: configureStore({
+//     favourites: favouritesReducer,
+//     search: searchReducer,
+//   }),
+//   // we're going to tell Redux which reducer function to use!
+// })
 
-// the final step now is to INJECT the redux store into our component tree
+// export default store
+
+// // the final step now is to INJECT the redux store into our component tree
