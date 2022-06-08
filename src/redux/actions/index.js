@@ -49,7 +49,7 @@ export const getJobsAction = (url) => {
   return async (dispatch) => {
     try {
       let response = await fetch(
-        "https://strive-jobs-api.herokuapp.com/jobs?search=" + url
+        "https://strive-jobs-api.herokuapp.com/jobs?searchyy=" + url
       )
       if (response.ok) {
         let jobs = await response.json()

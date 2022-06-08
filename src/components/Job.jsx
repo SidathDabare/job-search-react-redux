@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { ADD_TO_FAVOURITES } from '../redux/actions'
-const mapStateToProps = (state) => {
-  return {
 
-  }
-}
+import { addToCartActionWithThunk } from '../redux/actions'
+import { useDispatch } from 'react-redux'
+// const mapStateToProps = (state) => {
+//   return {
+
+//   }
+// }
 
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addtoFavourite: (company) => {
-      dispatch({
-        type: ADD_TO_FAVOURITES,
-        payload: company,
-      })
-    },
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addtoFavourite: (company) => {
+//       dispatch({
+//         type: ADD_TO_FAVOURITES,
+//         payload: company,
+//       })
+//     },
+//   }
+// }
 
-const Job = ({ data, addtoFavourite }) => {
-  const [state, setState] = useState([])
+const Job = ({ data }) => {
+  // const [state, setState] = useState([])
   // console.log(state);
-
+  const dispatch = useDispatch()
 
   return (
     <Row
@@ -40,7 +41,8 @@ const Job = ({ data, addtoFavourite }) => {
         </a>
         <Button onClick={() => {
           console.log(data.company_name)
-          addtoFavourite(data.company_name)
+          // addtoFavourite(data.company_name)
+          dispatch(addToCartActionWithThunk(data.company_name))
 
         }}
         >Add to Favourite</Button>
@@ -51,4 +53,4 @@ const Job = ({ data, addtoFavourite }) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Job)
+export default Job
